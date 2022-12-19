@@ -1,0 +1,28 @@
+---
+- hosts: udacityvm
+  name: setup udacity project
+  gather_facts: true
+  become: true
+
+  vars:
+    jaeger_version: v1.39.0
+
+  collections:
+    - geerlingguy.k8s
+    - kubernetes.core
+
+  roles:
+    - geerlingguy.helm
+    - andrewrothstein.k9s
+
+  pre_tasks:
+    - name: Run pre-tasks
+      include_tasks: pre-tasks.yml
+
+  tasks:
+    - name: Run subtasks
+      include_tasks: "{{ item }}"
+      loop:
+        - subtasks/setup-user.yml
+        - subtasks/setup-monitoring.yml
+        - subtasks/setup-observability.yml

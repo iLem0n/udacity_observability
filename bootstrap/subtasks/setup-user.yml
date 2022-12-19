@@ -1,0 +1,14 @@
+---
+- name: Creates kube directory
+  file:
+    path: /home/{{ ansible_user }}/.kube
+    state: directory
+    
+- name: Move kubeconfig 
+  become: true
+  copy: 
+    remote_src: yes
+    src: /etc/rancher/k3s/k3s.yaml
+    dest: "/home/{{ ansible_user }}/.kube/config"
+    owner: "{{ ansible_user }}"
+    mode: "0600"

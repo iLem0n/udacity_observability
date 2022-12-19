@@ -1,0 +1,19 @@
+---
+- name: Install zypper packages
+  become: true
+  zypper:
+    name: "{{ item }}"
+    state: present
+    update_cache: true
+  loop:
+    - python3
+    - python3-pip
+    # private flavor
+    - vim
+    - k9s
+
+- name: Install python packages 
+  pip:
+    name:
+      - pyyaml
+      - kubernetes
