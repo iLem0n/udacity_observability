@@ -34,13 +34,12 @@ Vagrant.configure("2") do |config|
   # within the machine from a port on the host machine. In the example below,
   # accessing "localhost:8080" will access port 80 on the guest machine.
   # NOTE: This will enable public access to the opened port
-  config.vm.network "forwarded_port", guest: 22, host: 22
   config.vm.network "forwarded_port", guest: 80, host: 8080
   config.vm.network "forwarded_port", guest: 9090, host: 9090
   config.vm.network "forwarded_port", guest: 8080, host: 8080
   #config.vm.network "forwarded_port", guest: 8888, host: 8080 
   config.vm.network "forwarded_port", guest: 9090, host: 8888
-  config.vm.network "forwarded_port", guest: 3000, host: 3000, host_ip: "127.0.0.1" # grafana
+  config.vm.network "forwarded_port", guest: 3000, host: 3000 # grafana
   config.vm.network "forwarded_port", guest: 3030, host: 3030
   config.vm.network "forwarded_port", guest: 8080, host: 8080
   config.vm.network "forwarded_port", guest: 16686, host: 8088
@@ -57,7 +56,7 @@ Vagrant.configure("2") do |config|
   # using a specific IP.
   config.vm.network "private_network", ip: "192.168.33.10"
 
-  # Create a public network, which generally matched to bridged network.
+  # Create a public network, which generally matched to bridged networ¥k.
   # Bridged networks make the machine appear as another physical device on
   # your network.
   # config.vm.network "public_network"
@@ -66,7 +65,7 @@ Vagrant.configure("2") do |config|
   # the path on the host to the actual folder. The second argument is
   # the path on the guest to mount the folder. And the optional third
   # argument is a set of non-required options.
-  config.vm.synced_folder ".", "/vagrant_data"
+  config.vm.synced_folder ".", "/vagrant"
 
   # Provider-specific configuration so you can fine-tune various
   # backing providers for Vagrant. These expose provider-specific options.
@@ -78,9 +77,10 @@ Vagrant.configure("2") do |config|
   #
   #   # Customize the amount of memory on the VM:clear
 
-    vb.memory = "4096"
+    vb.memory = "6144"
+    #vb.memory = "4096"
     #vb.memory = "2048"
-    vb.cpus = 2
+    vb.cpus = 4
     vb.name = "udacityvm"
   end
   #

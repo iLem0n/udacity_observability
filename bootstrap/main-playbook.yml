@@ -6,7 +6,7 @@
 
   vars:
     jaeger_version: v1.39.0
-
+    app_dir: /vagrant
   collections:
     - geerlingguy.k8s
     - kubernetes.core
@@ -26,3 +26,4 @@
         - subtasks/setup-user.yml
         - subtasks/setup-monitoring.yml
         - subtasks/setup-observability.yml
+        - subtasks/setup-application.yml

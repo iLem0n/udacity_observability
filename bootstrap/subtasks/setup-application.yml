@@ -1,0 +1,17 @@
+---
+- name: Deploy application
+  become: false
+  k8s:
+    state: present
+    src: "{{ item }}"
+    namespace: default
+  loop:
+    - /vagrant/manifests/app/backend.yaml
+    - /vagrant/manifests/app/frontend.yaml
+    - /vagrant/manifests/app/trial.yaml
+
+
+- name: Expose grafana
+  become: false
+  shell: nohup kubectl port-forward -n monitoring svc/$(kubectl get svc -n monitoring | grep grafana | awk '{ print $1; }') 3000:80 >/dev/null 2>&1 &
+  # shell: nohup kubectl port-forward -n monitoring svc/$(kubectl get svc -n monitoring | grep grafana | awk '{ print $1; }') 3000 &
